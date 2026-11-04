@@ -11,7 +11,7 @@ import streamlit as st
 from .country_state import get_chart_context, initialize_context, reset_context, select_country
 from .q5_data import DEFAULT_MIN_VALID, FEATURES, fingerprint, read_geography, read_snapshot, summarize_features, unmapped_countries, validate_min_valid
 from .q5_figures import ROLE_COLORS, build_distribution, build_map
-from .map_assets import component_script
+from .map_assets import component_script, component_version
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -32,7 +32,7 @@ def geography(root: str, geo_mtime: int):
 
 
 @st.cache_resource(show_spinner=False)
-def map_component(source_version: int):
+def map_component(source_version: tuple):
     return st.components.v2.component("spotify_q5_country_map",
         html='''<div class="q5-map-root"><div class="q5-map-tools" role="toolbar" aria-label="Map navigation">
           <button type="button" data-map-action="in" aria-label="Zoom in" title="Zoom in">+</button>
@@ -198,7 +198,7 @@ def render(root: Path = ROOT):
             st.error(f"World map unavailable: {map_error}")
             return
         figure = build_map(summary, feature, context, geo, map_height - 34, st.session_state.get("q5_reset_epoch", 0))
-        map_component((ROOT / "src/ui/q5_map.js").stat().st_mtime_ns)(data={"figure": json.loads(figure.to_json()), "feature": feature, "feature_label": label,
+        map_component(component_version(ROOT, "q5_map.js"))(data={"figure": json.loads(figure.to_json()), "feature": feature, "feature_label": label,
             "valid_codes": choices, "country_a": context["country_a"], "country_b": context["country_b"],
             "target": st.session_state["q5_target"]},
             key="q5_world_map", height=map_height, on_country_click_change=lambda: _map_clicked(choices))

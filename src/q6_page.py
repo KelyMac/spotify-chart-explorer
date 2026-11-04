@@ -14,7 +14,7 @@ from .q5_data import fingerprint, read_geography, unmapped_countries
 from .q5_page import load_data
 from .q6_data import analyze_snapshot, overlap_by_depth, shared_songs, song_countries
 from .q6_figures import coverage_bars, coverage_map, overlap_profile, rank_scatter
-from .map_assets import component_script
+from .map_assets import component_script, component_version
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE_SIZE = 10
@@ -199,7 +199,7 @@ def render(root: Path = ROOT):
                     if not (root / "static/q5_plotly.min.js").is_file():
                         raise ValueError("Missing static/q5_plotly.min.js.")
                     figure = coverage_map(countries, appearances, song, metadata["snapshot_date"])
-                    local_map((ROOT / "src/ui/q6_map.js").stat().st_mtime_ns)(
+                    local_map(component_version(ROOT, "q6_map.js"))(
                         data={"figure": json.loads(figure.to_json())}, key="q6_map", height=365)
                 except (OSError, ValueError, KeyError) as error:
                     st.error(f"World map unavailable: {error}")

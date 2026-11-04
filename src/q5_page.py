@@ -11,6 +11,7 @@ import streamlit as st
 from .country_state import get_chart_context, initialize_context, reset_context, select_country
 from .q5_data import DEFAULT_MIN_VALID, FEATURES, fingerprint, read_geography, read_snapshot, summarize_features, unmapped_countries, validate_min_valid
 from .q5_figures import ROLE_COLORS, build_distribution, build_map
+from .map_assets import component_script
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -50,7 +51,7 @@ def map_component(source_version: int):
         .q5-map-tools select{max-width:100%}
         .q5-map-error{padding:18px;border:1px solid #E7A0A0;border-radius:6px;background:#FFF4F4;color:#842029;font:15px/1.5 Arial,sans-serif}.q5-map-error[hidden]{display:none}
         """,
-        js=(ROOT / "src/ui/q5_map.js").read_text(encoding="utf-8"), isolate_styles=False)
+        js=component_script(ROOT, "q5_map.js"), isolate_styles=False)
 
 
 def _sync_widgets():
@@ -186,8 +187,6 @@ def render(root: Path = ROOT):
         geo_file = root / "static/geo/world_50m.json"
         geo = geography(str(root), geo_file.stat().st_mtime_ns)
         unmatched = unmapped_countries(data, geo)
-        if not st.get_option("server.enableStaticServing"):
-            raise ValueError("Local static serving is disabled. Start Streamlit from the project directory.")
         if not (root / "static/q5_plotly.min.js").is_file():
             raise ValueError("Missing static/q5_plotly.min.js.")
     except (OSError, ValueError, KeyError) as error:
@@ -199,11 +198,9 @@ def render(root: Path = ROOT):
             st.error(f"World map unavailable: {map_error}")
             return
         figure = build_map(summary, feature, context, geo, map_height - 34, st.session_state.get("q5_reset_epoch", 0))
-        base = st.get_option("server.baseUrlPath").strip("/")
-        static_url = f"/{base + '/' if base else ''}app/static/"
         map_component((ROOT / "src/ui/q5_map.js").stat().st_mtime_ns)(data={"figure": json.loads(figure.to_json()), "feature": feature, "feature_label": label,
             "valid_codes": choices, "country_a": context["country_a"], "country_b": context["country_b"],
-            "target": st.session_state["q5_target"], "plotly_url": static_url + "q5_plotly.min.js", "topojson_url": static_url + "geo/"},
+            "target": st.session_state["q5_target"]},
             key="q5_world_map", height=map_height, on_country_click_change=lambda: _map_clicked(choices))
         if not unmatched.empty:
             st.warning(f"{len(unmatched)} chart geographies have no exact map match; use country search to compare them.")

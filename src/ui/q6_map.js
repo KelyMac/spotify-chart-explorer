@@ -8,25 +8,13 @@ export default function ({parentElement, data}) {
     if (window.Plotly && plot._fullLayout) window.Plotly.Plots.resize(plot);
   });
   resize.observe(plot);
-  function loadPlotly() {
-    if (window.Plotly) return Promise.resolve();
-    window.__spotifyQ6Plotly ||= new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = data.plotly_url;
-      script.onload = resolve;
-      script.onerror = () => { window.__spotifyQ6Plotly = null; reject(new Error('Local Plotly could not load')); };
-      document.head.appendChild(script);
-    });
-    return window.__spotifyQ6Plotly;
-  }
-  Promise.all([loadPlotly(), fetch(data.topojson_url + 'world_50m.json').then(async response => {
-    if (!response.ok) throw new Error('Local geography HTTP ' + response.status);
-    const topology = await response.json();
+  Promise.resolve().then(async () => {
+    if (!window.Plotly) throw new Error('Bundled Plotly is unavailable');
+    const topology = window.PlotlyGeoAssets?.topojson?.world_50m;
     if (!topology.objects?.countries) throw new Error('Invalid local geography');
-  })]).then(async () => {
     if (cancelled) return;
     await window.Plotly.newPlot(plot, data.figure.data, data.figure.layout, {
-      responsive: true, displayModeBar: false, scrollZoom: true, topojsonURL: data.topojson_url
+      responsive: true, displayModeBar: false, scrollZoom: true
     });
     if (cancelled) return;
     plot.dataset.ready = 'true';

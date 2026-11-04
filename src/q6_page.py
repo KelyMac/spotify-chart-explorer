@@ -14,6 +14,7 @@ from .q5_data import fingerprint, read_geography, unmapped_countries
 from .q5_page import load_data
 from .q6_data import analyze_snapshot, overlap_by_depth, shared_songs, song_countries
 from .q6_figures import coverage_bars, coverage_map, overlap_profile, rank_scatter
+from .map_assets import component_script
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE_SIZE = 10
@@ -32,7 +33,7 @@ def local_map(source_version):
         .q6-map-error{padding:18px;background:#FFF4F4;color:#842029;border:1px solid #E7A0A0;border-radius:6px;font:14px/1.5 Arial}
         .q6-map-error[hidden]{display:none}
         ''',
-        js=(ROOT / "src/ui/q6_map.js").read_text(encoding="utf-8"), isolate_styles=False)
+        js=component_script(ROOT, "q6_map.js"), isolate_styles=False)
 
 
 def _changed(role, codes):
@@ -195,13 +196,11 @@ def render(root: Path = ROOT):
                     geo = read_geography(root)
                     if not unmapped_countries(data, geo).empty:
                         raise ValueError("Some country codes lack an exact geographic match; use the rank table.")
-                    if not st.get_option("server.enableStaticServing") or not (root / "static/q5_plotly.min.js").is_file():
-                        raise ValueError("Local static serving or Plotly resource is unavailable.")
+                    if not (root / "static/q5_plotly.min.js").is_file():
+                        raise ValueError("Missing static/q5_plotly.min.js.")
                     figure = coverage_map(countries, appearances, song, metadata["snapshot_date"])
-                    base = st.get_option("server.baseUrlPath").strip("/")
-                    static_url = f"/{base + '/' if base else ''}app/static/"
-                    local_map((ROOT / "src/ui/q6_map.js").stat().st_mtime_ns)(data={"figure": json.loads(figure.to_json()),
-                        "plotly_url": static_url + "q5_plotly.min.js", "topojson_url": static_url + "geo/"}, key="q6_map", height=365)
+                    local_map((ROOT / "src/ui/q6_map.js").stat().st_mtime_ns)(
+                        data={"figure": json.loads(figure.to_json())}, key="q6_map", height=365)
                 except (OSError, ValueError, KeyError) as error:
                     st.error(f"World map unavailable: {error}")
                 with st.expander(f"All charting countries and ranks ({len(appearances)})"):

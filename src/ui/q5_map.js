@@ -121,31 +121,13 @@ export default function ({ parentElement, data, setTriggerValue }) {
   });
   resize.observe(plot);
 
-  function loadPlotly() {
-    if (!window.__spotifyQ5PlotlyReady) {
-      window.__spotifyQ5PlotlyReady = new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src = data.plotly_url;
-        script.onload = () => window.Plotly ? resolve(window.Plotly) : reject(new Error("Local Plotly did not initialize"));
-        script.onerror = () => {
-          window.__spotifyQ5PlotlyReady = null;
-          reject(new Error("Local Plotly resource could not be loaded"));
-        };
-        document.head.appendChild(script);
-      });
-    }
-    return window.__spotifyQ5PlotlyReady;
-  }
-
   error.hidden = true;
   plot.style.display = "block";
   plot.dataset.ready = "false";
   plot.setAttribute("aria-label", `${data.feature_label}: median audio characteristic by country`);
-  loadPlotly().then(async (Plotly) => {
-    // Report missing geometry instead of rendering an empty map.
-    const response = await fetch(data.topojson_url + "world_50m.json", { cache: "force-cache" });
-    if (!response.ok) throw new Error("Local world geometry returned HTTP " + response.status);
-    const topology = await response.json();
+  Promise.resolve(window.Plotly).then(async (Plotly) => {
+    if (!Plotly) throw new Error("Bundled Plotly is unavailable");
+    const topology = window.PlotlyGeoAssets?.topojson?.world_50m;
     if (topology.type !== "Topology" || !topology.objects?.countries) throw new Error("Invalid local world geometry");
     if (cancelled) return;
     const layout = { ...data.figure.layout, geo: { ...data.figure.layout.geo } };
@@ -157,7 +139,7 @@ export default function ({ parentElement, data, setTriggerValue }) {
       layout.geo.lonaxis = { ...layout.geo.lonaxis, range: saved.longitudeRange };
     }
     await Plotly.react(plot, data.figure.data, layout, {
-      topojsonURL: data.topojson_url, displaylogo: false, responsive: true,
+      displaylogo: false, responsive: true,
       scrollZoom: true, displayModeBar: false
     });
     if (cancelled) return;

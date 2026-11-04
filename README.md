@@ -31,7 +31,7 @@ RQ6 点线图的纵轴固定为 0–100%，便于比较不同国家组合；点�
 
 `processed/` 保存快照和国家代码表；`output/` 保存数据审计、日期覆盖表和校验清单。这些文件用于启动时的数据检查。CSV 保持原始准备结果，清单仅列出本项目使用的两张数据表。
 
-地图资源存于 `static/`，运行时从本地加载。世界地图来源为 [Plotly world geometry](https://cdn.plot.ly/un/world_50m.json)，来源和校验值见 `static/geo/source.json`。Plotly JavaScript 文件保留原 MIT 许可声明。
+地图资源存于 `static/`，通过 Streamlit 组件一并加载，不依赖云端的 `/app/static/` 路由或外部 CDN。世界地图来源为 [Plotly world geometry](https://cdn.plot.ly/un/world_50m.json)，来源和校验值见 `static/geo/source.json`。Plotly JavaScript 文件保留原 MIT 许可声明。
 
 ## 测试与部署
 

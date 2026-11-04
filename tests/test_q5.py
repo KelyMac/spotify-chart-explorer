@@ -12,6 +12,7 @@ import numpy as np
 from src.country_state import get_chart_context, initialize_context, reset_context, select_country
 from src.q5_data import FEATURES, feature_values, read_geography, read_snapshot, summarize_features, unmapped_countries, validate_chart_frame
 from src.q5_figures import ROLE_COLORS, build_distribution, build_map
+from src.map_assets import component_script, component_name
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -186,6 +187,10 @@ class Q5Tests(unittest.TestCase):
         from streamlit.testing.v1 import AppTest
         app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=20).run()
         self.assertFalse(app.exception)
+        component = app.get("bidi_component")[0].proto
+        script = component_script(ROOT, "q5_map.js")
+        self.assertEqual(component.js_content, script)
+        self.assertEqual(component.component_name, component_name("q5", script))
         self.assertEqual(len(app.number_input), 0)
         self.assertIsNone(app.selectbox(key="q5_country_a").value)
         app.selectbox(key="q5_country_a").select("SG").run()
@@ -231,6 +236,20 @@ class Q5Tests(unittest.TestCase):
             app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=20).run()
             self.assertFalse(app.exception)
             self.assertIn("No country charts", app.error[0].value)
+
+    def test_portal_refreshes_stale_imported_page(self):
+        import streamlit as st
+        from streamlit.testing.v1 import AppTest
+
+        st.cache_resource.clear()
+        with patch("src.q5_page.map_component", side_effect=AssertionError("Stale page module was used")):
+            app = AppTest.from_file(str(ROOT / "portal.py"), default_timeout=30).run()
+            self.assertFalse(app.exception)
+            component = app.get("bidi_component")[0].proto
+            script = component_script(ROOT, "q5_map.js")
+            self.assertEqual(component.js_content, script)
+            self.assertEqual(component.component_name, component_name("q5", script))
+        st.cache_resource.clear()
 
 
 if __name__ == "__main__":

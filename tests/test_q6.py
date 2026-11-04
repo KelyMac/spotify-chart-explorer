@@ -11,6 +11,7 @@ from src.q5_data import read_snapshot
 from src.q6_data import analyze_snapshot, overlap_by_depth, shared_songs, song_countries
 from src.q6_figures import coverage_bars, coverage_map, overlap_profile, rank_scatter
 from src.q6_page import _song_labels
+from src.map_assets import component_script, component_name
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = "pages/6_Q6_Shared_Songs.py"
@@ -213,6 +214,10 @@ class Q6Tests(unittest.TestCase):
         selected = self.analysis["songs"].iloc[0].spotify_id
         app.selectbox(key="q6_song_picker").select(selected).run()
         self.assertFalse(app.exception)
+        component = app.get("bidi_component")[0].proto
+        script = component_script(ROOT, "q6_map.js")
+        self.assertEqual(component.js_content, script)
+        self.assertEqual(component.component_name, component_name("q6", script))
         self.assertIn("All charting countries and ranks (52)", [item.label for item in app.expander])
         self.assertFalse(app.caption)
         app.radio(key="q6_view").set_value("Two-country overlap").run()

@@ -11,7 +11,7 @@ import streamlit as st
 from .country_state import get_chart_context, initialize_context, reset_context, select_country
 from .q5_data import DEFAULT_MIN_VALID, FEATURES, fingerprint, read_geography, read_snapshot, summarize_features, unmapped_countries, validate_min_valid
 from .q5_figures import ROLE_COLORS, build_distribution, build_map
-from .map_assets import component_script, component_version
+from .map_assets import component_name, component_script, component_version
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -33,7 +33,8 @@ def geography(root: str, geo_mtime: int):
 
 @st.cache_resource(show_spinner=False)
 def map_component(source_version: tuple):
-    return st.components.v2.component("spotify_q5_country_map",
+    script = component_script(ROOT, "q5_map.js")
+    return st.components.v2.component(component_name("q5", script),
         html='''<div class="q5-map-root"><div class="q5-map-tools" role="toolbar" aria-label="Map navigation">
           <button type="button" data-map-action="in" aria-label="Zoom in" title="Zoom in">+</button>
           <button type="button" data-map-action="out" aria-label="Zoom out" title="Zoom out">−</button>
@@ -51,7 +52,7 @@ def map_component(source_version: tuple):
         .q5-map-tools select{max-width:100%}
         .q5-map-error{padding:18px;border:1px solid #E7A0A0;border-radius:6px;background:#FFF4F4;color:#842029;font:15px/1.5 Arial,sans-serif}.q5-map-error[hidden]{display:none}
         """,
-        js=component_script(ROOT, "q5_map.js"), isolate_styles=False)
+        js=script, isolate_styles=False)
 
 
 def _sync_widgets():

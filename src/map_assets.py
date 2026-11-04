@@ -1,8 +1,14 @@
 """Bundle map dependencies with the component instead of app/static routes."""
 
 from pathlib import Path
+import hashlib
 
 from .q5_data import read_geography
+
+
+def component_name(page: str, script: str) -> str:
+    digest = hashlib.sha256(script.encode("utf-8")).hexdigest()[:12]
+    return f"spotify_{page}_map_{digest}"
 
 
 def component_version(root: Path, filename: str) -> tuple:

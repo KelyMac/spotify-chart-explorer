@@ -14,7 +14,7 @@ from .q5_data import fingerprint, read_geography, unmapped_countries
 from .q5_page import load_data
 from .q6_data import analyze_snapshot, overlap_by_depth, shared_songs, song_countries
 from .q6_figures import coverage_bars, coverage_map, overlap_profile, rank_scatter
-from .map_assets import component_script, component_version
+from .map_assets import component_name, component_script, component_version
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE_SIZE = 10
@@ -27,13 +27,14 @@ def cached_analysis(data, snapshot_date):
 
 @st.cache_resource(show_spinner=False)
 def local_map(source_version):
-    return st.components.v2.component("spotify_q6_coverage_map",
+    script = component_script(ROOT, "q6_map.js")
+    return st.components.v2.component(component_name("q6", script),
         html='<div class="q6-map-error" role="alert" hidden></div><div class="q6-map-plot"></div>',
         css='''
         .q6-map-error{padding:18px;background:#FFF4F4;color:#842029;border:1px solid #E7A0A0;border-radius:6px;font:14px/1.5 Arial}
         .q6-map-error[hidden]{display:none}
         ''',
-        js=component_script(ROOT, "q6_map.js"), isolate_styles=False)
+        js=script, isolate_styles=False)
 
 
 def _changed(role, codes):

@@ -1,0 +1,27 @@
+{
+  "stage": "data_preparation",
+  "prepared_at": "2026-10-31T00:08:39.499985+08:00",
+  "status": "validated",
+  "selected_chart_date": "2025-04-12",
+  "selected_country_count": 72,
+  "raw_files": [
+    {
+      "path": "rawdata/universal_top_spotify_songs.csv",
+      "bytes": 497967212,
+      "sha256_before": "dc5b92d1042a3f1af52e46583f2caf9c68a9f2d70da0f9da3e5b3d17dd302518",
+      "sha256_after": "dc5b92d1042a3f1af52e46583f2caf9c68a9f2d70da0f9da3e5b3d17dd302518"
+    }
+  ],
+  "generated_files": [
+    {
+      "path": "processed/charts_snapshot.csv",
+      "bytes": 865019,
+      "sha256": "18cc68ba3de4b1089414bb3fe10abf5ebcffded8b9a57d18275377c1d621e12c"
+    },
+    {
+      "path": "processed/country_codes.csv",
+      "bytes": 1912,
+      "sha256": "69b2d9cc45815f799ae568d39cdcb194c7ed86c7b4d8d5baca9d665efa658925"
+    }
+  ]
+}

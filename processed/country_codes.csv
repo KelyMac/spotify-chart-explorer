@@ -1,0 +1,74 @@
+﻿country_code,country_type,iso3,country_name
+,unclassified_blank,,Unclassified blank code
+AE,country,ARE,United Arab Emirates
+AR,country,ARG,Argentina
+AT,country,AUT,Austria
+AU,country,AUS,Australia
+BE,country,BEL,Belgium
+BG,country,BGR,Bulgaria
+BO,country,BOL,"Bolivia, Plurinational State of"
+BR,country,BRA,Brazil
+BY,country,BLR,Belarus
+CA,country,CAN,Canada
+CH,country,CHE,Switzerland
+CL,country,CHL,Chile
+CO,country,COL,Colombia
+CR,country,CRI,Costa Rica
+CZ,country,CZE,Czechia
+DE,country,DEU,Germany
+DK,country,DNK,Denmark
+DO,country,DOM,Dominican Republic
+EC,country,ECU,Ecuador
+EE,country,EST,Estonia
+EG,country,EGY,Egypt
+ES,country,ESP,Spain
+FI,country,FIN,Finland
+FR,country,FRA,France
+GB,country,GBR,United Kingdom
+GR,country,GRC,Greece
+GT,country,GTM,Guatemala
+HK,country,HKG,Hong Kong
+HN,country,HND,Honduras
+HU,country,HUN,Hungary
+ID,country,IDN,Indonesia
+IE,country,IRL,Ireland
+IL,country,ISR,Israel
+IN,country,IND,India
+IS,country,ISL,Iceland
+IT,country,ITA,Italy
+JP,country,JPN,Japan
+KR,country,KOR,"Korea, Republic of"
+KZ,country,KAZ,Kazakhstan
+LT,country,LTU,Lithuania
+LU,country,LUX,Luxembourg
+LV,country,LVA,Latvia
+MA,country,MAR,Morocco
+MX,country,MEX,Mexico
+MY,country,MYS,Malaysia
+NG,country,NGA,Nigeria
+NI,country,NIC,Nicaragua
+NL,country,NLD,Netherlands
+NO,country,NOR,Norway
+NZ,country,NZL,New Zealand
+PA,country,PAN,Panama
+PE,country,PER,Peru
+PH,country,PHL,Philippines
+PK,country,PAK,Pakistan
+PL,country,POL,Poland
+PT,country,PRT,Portugal
+PY,country,PRY,Paraguay
+RO,country,ROU,Romania
+SA,country,SAU,Saudi Arabia
+SE,country,SWE,Sweden
+SG,country,SGP,Singapore
+SK,country,SVK,Slovakia
+SV,country,SLV,El Salvador
+TH,country,THA,Thailand
+TR,country,TUR,Türkiye
+TW,country,TWN,"Taiwan, Province of China"
+UA,country,UKR,Ukraine
+US,country,USA,United States
+UY,country,URY,Uruguay
+VE,country,VEN,"Venezuela, Bolivarian Republic of"
+VN,country,VNM,Viet Nam
+ZA,country,ZAF,South Africa

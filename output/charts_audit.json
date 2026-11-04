@@ -1,0 +1,297 @@
+{
+  "source_file": "rawdata/universal_top_spotify_songs.csv",
+  "source_bytes": 497967212,
+  "encoding": "UTF-8 (strict; optional BOM accepted)",
+  "raw_rows": 2110316,
+  "raw_columns": 25,
+  "raw_column_names": [
+    "spotify_id",
+    "name",
+    "artists",
+    "daily_rank",
+    "daily_movement",
+    "weekly_movement",
+    "country",
+    "snapshot_date",
+    "popularity",
+    "is_explicit",
+    "duration_ms",
+    "album_name",
+    "album_release_date",
+    "danceability",
+    "energy",
+    "key",
+    "loudness",
+    "mode",
+    "speechiness",
+    "acousticness",
+    "instrumentalness",
+    "liveness",
+    "valence",
+    "tempo",
+    "time_signature"
+  ],
+  "full_history_unique_song_ids": 24983,
+  "missing_by_column": {
+    "spotify_id": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "name": {
+      "count": 30,
+      "fraction": 1.4215880465295245e-05
+    },
+    "artists": {
+      "count": 29,
+      "fraction": 1.3742017783118736e-05
+    },
+    "daily_rank": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "daily_movement": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "weekly_movement": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "country": {
+      "count": 28908,
+      "fraction": 0.013698422416358498
+    },
+    "snapshot_date": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "popularity": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "is_explicit": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "duration_ms": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "album_name": {
+      "count": 822,
+      "fraction": 0.0003895151247490897
+    },
+    "album_release_date": {
+      "count": 659,
+      "fraction": 0.0003122755075543189
+    },
+    "danceability": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "energy": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "key": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "loudness": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "mode": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "speechiness": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "acousticness": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "instrumentalness": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "liveness": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "valence": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "tempo": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "time_signature": {
+      "count": 0,
+      "fraction": 0.0
+    }
+  },
+  "invalid_numeric_counts": {
+    "daily_rank": 0,
+    "daily_movement": 0,
+    "weekly_movement": 0,
+    "popularity": 0,
+    "duration_ms": 29,
+    "danceability": 0,
+    "energy": 0,
+    "key": 0,
+    "loudness": 0,
+    "mode": 0,
+    "speechiness": 0,
+    "acousticness": 0,
+    "instrumentalness": 0,
+    "liveness": 0,
+    "valence": 0,
+    "tempo": 0,
+    "time_signature": 0
+  },
+  "exact_duplicate_rows": 0,
+  "conflicting_key_groups": 0,
+  "conflicting_key_records": 0,
+  "country_codes_including_blank": 73,
+  "mapped_country_codes": 72,
+  "unmapped_nonblank_codes": [],
+  "explicit_global_codes": [],
+  "blank_country_rows": 28908,
+  "blank_country_policy": "Preserved as unclassified_blank; excluded from country comparisons. Global meaning is not established by primary metadata.",
+  "date_min": "2023-10-18",
+  "date_max": "2025-06-11",
+  "dates_present": 583,
+  "calendar_days_without_records": [
+    "2024-03-15",
+    "2024-03-17",
+    "2024-11-28",
+    "2024-11-29",
+    "2024-11-30",
+    "2024-12-01",
+    "2024-12-02",
+    "2024-12-03",
+    "2024-12-04",
+    "2024-12-05",
+    "2024-12-07",
+    "2024-12-08",
+    "2025-04-22",
+    "2025-04-23",
+    "2025-04-24",
+    "2025-04-25",
+    "2025-04-26",
+    "2025-04-27",
+    "2025-04-28",
+    "2025-04-29"
+  ],
+  "invalid_date_records": 0,
+  "country_date_groups": 41621,
+  "complete_country_date_groups": 41167,
+  "incomplete_country_date_groups": 454,
+  "missing_country_dates_full_calendar": 1795,
+  "missing_country_dates_on_observed_dates": 355,
+  "missing_country_date_universe": "All mapped country codes ever observed in this file x every calendar day between min and max valid dates. Absence is not zero overlap.",
+  "latest_date_complete_countries": 71,
+  "latest_date_absent_country_codes": [
+    "GB"
+  ],
+  "selected_date": "2025-04-12",
+  "selected_country_count": 72,
+  "selected_countries": [
+    "AE",
+    "AR",
+    "AT",
+    "AU",
+    "BE",
+    "BG",
+    "BO",
+    "BR",
+    "BY",
+    "CA",
+    "CH",
+    "CL",
+    "CO",
+    "CR",
+    "CZ",
+    "DE",
+    "DK",
+    "DO",
+    "EC",
+    "EE",
+    "EG",
+    "ES",
+    "FI",
+    "FR",
+    "GB",
+    "GR",
+    "GT",
+    "HK",
+    "HN",
+    "HU",
+    "ID",
+    "IE",
+    "IL",
+    "IN",
+    "IS",
+    "IT",
+    "JP",
+    "KR",
+    "KZ",
+    "LT",
+    "LU",
+    "LV",
+    "MA",
+    "MX",
+    "MY",
+    "NG",
+    "NI",
+    "NL",
+    "NO",
+    "NZ",
+    "PA",
+    "PE",
+    "PH",
+    "PK",
+    "PL",
+    "PT",
+    "PY",
+    "RO",
+    "SA",
+    "SE",
+    "SG",
+    "SK",
+    "SV",
+    "TH",
+    "TR",
+    "TW",
+    "UA",
+    "US",
+    "UY",
+    "VE",
+    "VN",
+    "ZA"
+  ],
+  "selected_snapshot_rows": 3600,
+  "selected_snapshot_unique_song_ids": 1962,
+  "date_selection_rule": "Maximize complete mapped-country Top 50 charts after exact duplicate removal; choose latest date on ties.",
+  "chart_completeness_rule": "50 distinct IDs; exactly one each rank 1..50; nonempty IDs; valid same date; no conflicting same-key records. Audio availability is separate.",
+  "audio_policy": "Only missing/invalid numeric fields are blank; songs remain for ID overlap. Equal song weights; no imputation or fuzzy ID matching.",
+  "source": "https://www.kaggle.com/datasets/asaniczka/top-spotify-songs-in-73-countries-daily-updated",
+  "publisher_warning": "Data may be missing / incomplete from 2024-11-27 to 2024-12-09 due to Spotify API changes.",
+  "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/metadata/asaniczka/top-spotify-songs-in-73-countries-daily-updated",
+  "source_verification_date": "2026-10-30",
+  "sha256_before": "dc5b92d1042a3f1af52e46583f2caf9c68a9f2d70da0f9da3e5b3d17dd302518",
+  "sha256_after": "dc5b92d1042a3f1af52e46583f2caf9c68a9f2d70da0f9da3e5b3d17dd302518",
+  "raw_unchanged": true,
+  "validated": [
+    "raw SHA-256 unchanged",
+    "shared date",
+    "unique country/date/ID key",
+    "complete rank sets",
+    "50 IDs per country",
+    "all map codes resolved"
+  ]
+}

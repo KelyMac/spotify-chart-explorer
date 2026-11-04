@@ -1,0 +1,7 @@
+{
+  "url": "https://cdn.plot.ly/un/world_50m.json",
+  "accessed": "2026-10-31",
+  "sha256": "20a160dbd13dd2bfa22f1858c0ae657860ea066d889563c51da383fd9696d759",
+  "purpose": "Plotly country geometry at 1:50m resolution; served locally without runtime CDN access.",
+  "mapping": "Exact ISO3 only. Geometry label points use source properties.ct; no remapping of unmatched areas."
+}

@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+# Preserve bytes for data and assets checked by SHA-256.
+processed/*.csv -text
+output/*.csv -text
+static/** -text

@@ -99,7 +99,7 @@ def coverage_bars(songs, total, selected=None, limit=10, *, page=0, show_rank=Fa
         text=[str(count) for count in rows.country_count], textposition="outside", cliponaxis=False,
         customdata=[[r.spotify_id, label(r.name, 40), label(r.artists, 40), r.coverage_rank] for r in rows.itertuples()],
         hovertemplate="<b>%{customdata[1]}</b><br>Artist: %{customdata[2]}<br>Coverage rank (ties share rank): %{customdata[3]}<br>Chart countries: %{x}/"+str(total)+"<extra></extra>"))
-    fig.update_layout(xaxis={"title": f"Chart countries<br>(out of {total})", "range": [0, total], "fixedrange": True},
+    fig.update_layout(xaxis={"title": "Chart countries", "range": [0, total], "fixedrange": True},
         yaxis={"tickvals": rows.spotify_id.tolist(),
                "ticktext": [f"#{int(row.coverage_rank)} · {label(row.name, 21)}" if show_rank else label(row.name, 23)
                             for row in rows.itertuples()], "fixedrange": True},

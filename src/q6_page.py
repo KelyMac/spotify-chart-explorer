@@ -155,7 +155,7 @@ def render(root: Path = ROOT):
                     width="stretch", config={"displayModeBar": False}, key="q6_rank_scatter")
                 st.caption("Each marker is one shared song. Dotted diagonal: equal rank in both countries.")
             with st.expander(f"Shared songs and both ranks ({len(common)})"):
-                _table(common, {"name": "Track", "artists": "Artist", "rank_a": "Country A rank", "rank_b": "Country B rank", "country_count": f"Chart countries (of {len(countries)})"})
+                _table(common, {"name": "Track", "artists": "Artist", "rank_a": "Country A rank", "rank_b": "Country B rank", "country_count": "Chart countries"})
                 st.download_button("Download shared songs CSV", common.drop(columns=["spotify_id"]).to_csv(index=False).encode("utf-8-sig"), "q6_shared_songs.csv", "text/csv")
     elif view == "Cross-country coverage":
         left, right = st.columns([1, 1.15])
@@ -207,5 +207,5 @@ def render(root: Path = ROOT):
                 with st.expander(f"All charting countries and ranks ({len(appearances)})"):
                     _table(appearances, {"country_name": "Country / territory", "daily_rank": "Local rank", "country_code": "Code"})
         with st.expander("Full song coverage ranking and download"):
-            _table(songs, {"coverage_rank": "Coverage rank", "name": "Track", "artists": "Artist", "country_count": f"Chart countries (of {len(countries)})", "coverage": "Share of eligible countries"})
+            _table(songs, {"coverage_rank": "Coverage rank", "name": "Track", "artists": "Artist", "country_count": "Chart countries", "coverage": "Share of eligible countries"})
             st.download_button("Download song coverage CSV", songs.drop(columns=["spotify_id"]).to_csv(index=False).encode("utf-8-sig"), "q6_song_coverage.csv", "text/csv")
